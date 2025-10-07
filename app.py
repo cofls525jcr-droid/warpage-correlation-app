@@ -14,14 +14,14 @@ spec = st.number_input("📌 제품 Warpage Spec (um 단위)", min_value=0.0, va
 
 # --- 파일 업로드 ---
 st.subheader("1️⃣ 품질팀 데이터 업로드")
-quality_file = st.file_uploader("품질팀 Excel 파일 업로드 (.xlsx, 컬럼: part no / warpage(um))", type="xlsx", key="q")
+quality_file = st.file_uploader("품질팀 Excel(csv) 파일 업로드 (.csv, 컬럼: part no / warpage(um))", type="csv", key="q")
 
 st.subheader("2️⃣ 개발팀 데이터 업로드")
-dev_file = st.file_uploader("개발팀 Excel 파일 업로드 (.xlsx, 컬럼: part no / warpage(um))", type="xlsx", key="d")
+dev_file = st.file_uploader("개발팀 Excel(csv) 파일 업로드 (.csv, 컬럼: part no / warpage(um))", type="csv", key="d")
 
 if quality_file and dev_file:
-    q_df = pd.read_excel(quality_file)
-    d_df = pd.read_excel(dev_file)
+    q_df = pd.read_csv(quality_file)
+    d_df = pd.read_csv(dev_file)
 
     # 컬럼 이름 통일
     q_df.columns = q_df.columns.str.lower().str.strip()
@@ -71,7 +71,7 @@ if quality_file and dev_file:
     # 다운로드 기능
     output = BytesIO()
     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-        merged.to_excel(writer, index=False, sheet_name="결과")
+        merged.to_csv(writer, index=False, sheet_name="결과")
     st.download_button(
         label="📥 비교 결과 Excel 다운로드",
         data=output.getvalue(),
