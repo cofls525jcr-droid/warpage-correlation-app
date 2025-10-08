@@ -68,14 +68,6 @@ if quality_file and dev_file:
     st.write("### 📈 Δ 분포 그래프")
     st.bar_chart(deltas)
 
-    # 다운로드 기능
-    csv = merged.to_csv(index=False).encode('utf-8-sig')
-    st.download_button(
-        label="📥 비교 결과 Excel 다운로드",
-        data=csv,
-        file_name="warpage_comparison.csv"
-        mime="text/csv"
-    )
 
 else:
     st.info("👆 품질팀 및 개발팀 데이터를 업로드해주세요.")
