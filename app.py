@@ -69,13 +69,12 @@ if quality_file and dev_file:
     st.bar_chart(deltas)
 
     # 다운로드 기능
-    output = BytesIO()
-    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-        merged.to_csv(writer, index=False, sheet_name="결과")
+    csv = merged.to_csv(index=False).encode('utf-8-sig')
     st.download_button(
         label="📥 비교 결과 Excel 다운로드",
-        data=output.getvalue(),
-        file_name="warpage_comparison.xlsx"
+        data=csv,
+        file_name="warpage_comparison.csv"
+        mime="text/csv"
     )
 
 else:
