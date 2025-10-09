@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 st.set_page_config(page_title="Warpage Comparison", layout="wide")
-st.title("A제품 Warpage 데이터 비교 (품질팀 vs D.sol)")
+st.title("Warpage 데이터 비교 (품질팀 vs D.sol)")
 
 # -----------------------------
 # 1️⃣ Spec 입력
